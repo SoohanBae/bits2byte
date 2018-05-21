@@ -5,6 +5,45 @@
     <title>My test page</title>
   </head>
   <body>
-    테스트
+    bit 입력 값 : <input type="text" id="input_bit">
+    
+    
+    <input type="button" id="button1" onclick="button1_click();" value="변환" /> <br>
+
+    <script type="text/javascript">
+    function button1_click() {
+      
+      var input_bit = document.getElementById("input_bit").value;
+      
+
+
+      if(input_bit.length % 16 != 0){
+        alert("비트열의 길이가 맞지 않습니다. 길이가 올바른지 확인해 주세요.");
+        return;
+      }
+      
+      var tmp = parseInt(input_bit,2);
+      var output_byte = (tmp).toString(16);
+      var max = output_byte.length/2 - 1;
+      var output_str = "";
+
+      for (let i = 0; i < max; i++) {
+        var tmp = output_byte[i*2]+output_byte[i*2+1]+", ";
+
+        output_str = output_str.concat("0x" + tmp);
+      }
+      output_str = output_str.concat("0x" + output_byte[output_byte.length-2] + output_byte[output_byte.length-1]);
+      
+      document.getElementById("output_byte").value = output_str;
+      var copyText = document.getElementById("output_byte");
+      copyText.select();
+      document.execCommand("Copy");
+      alert("클립보드에 복사되었습니다.");
+    }
+    </script>
+
+
+    byte 출력 값 : <input type="text" id="output_byte">
+
   </body>
 </html>
