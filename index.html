@@ -17,11 +17,8 @@
       
 
       alert(input_bit.length);
-      if(input_bit.length % bit != 4){
-        alert("비트열의 길이가 맞지 않습니다. 길이가 올바른지 확인해 주세요.");
-        return;
-      }
-      else if(input_bit.substring(input_bit.length-4,input_bit.length) != "1111"){
+
+      if(input_bit.substring(input_bit.length-4,input_bit.length) != "1111"){
         alert("복사가 올바르게 되었는지 확인해주세요.");
         return;
       }
