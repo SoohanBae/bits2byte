@@ -12,34 +12,45 @@
 
     <script type="text/javascript">
     function button1_click() {
-      
+      var bit = 8;
       var input_bit = document.getElementById("input_bit").value;
       
 
-
-      if(input_bit.length % 16 != 0){
+      alert(input_bit.length);
+      if(input_bit.length % bit != 4){
         alert("비트열의 길이가 맞지 않습니다. 길이가 올바른지 확인해 주세요.");
         return;
       }
-      
-      var tmp = parseInt(input_bit,2);
-      var output_byte = (tmp).toString(16);
-      var max = output_byte.length/2 - 1;
-      var output_str = "";
-
-      for (let i = 0; i < max; i++) {
-        var tmp = output_byte[i*2]+output_byte[i*2+1]+", ";
-
-        output_str = output_str.concat("0x" + tmp);
+      else if(input_bit.substring(input_bit.length-4,input_bit.length) != "1111"){
+        alert("복사가 올바르게 되었는지 확인해주세요.");
+        return;
       }
-      output_str = output_str.concat("0x" + output_byte[output_byte.length-2] + output_byte[output_byte.length-1]);
-      
-      document.getElementById("output_byte").value = output_str;
+
+      var max = (input_bit.length-4)/bit;
+      var output_byte = "";
+      for (let i = 0; i < max; i++) {
+        var tmp = input_bit.substring(i*bit,(i+1)*bit);
+        var tmp2 = reverse(tmp);
+        var tmp3 = parseInt(tmp2, 2);
+        var tmp4 = (tmp3).toString(16);
+        if(tmp4.length == 1){
+          tmp4 = '0' + tmp4;
+        }
+        output_byte = output_byte.concat("0x" + tmp4 +", ");
+      }
+      output_byte = output_byte.concat("0xff");
+
+     document.getElementById("output_byte").value = output_byte;
       var copyText = document.getElementById("output_byte");
       copyText.select();
       document.execCommand("Copy");
       alert("클립보드에 복사되었습니다.");
     }
+
+    function reverse(s){
+      return s.split("").reverse().join("");
+    }
+
     </script>
 
 
