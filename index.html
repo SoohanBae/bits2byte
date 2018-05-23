@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>My test page</title>
+    <title>Talkie bit to byte</title>
   </head>
   <body>
     bit 입력 값 : <input type="text" id="input_bit">
@@ -17,11 +17,7 @@
       
 
       alert(input_bit.length);
-
-      if(input_bit.substring(input_bit.length-4,input_bit.length) != "1111"){
-        alert("복사가 올바르게 되었는지 확인해주세요.");
-        return;
-      }
+  
 
       var max = (input_bit.length-4)/bit;
       var output_byte = "";
